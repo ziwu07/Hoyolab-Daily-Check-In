@@ -23,9 +23,10 @@ if ($null -eq $installedPythonVersion -or $installedPythonVersion -lt $requiredP
 
     Invoke-WebRequest -Uri $pythonInstallerUrl -OutFile $pythonInstallerPath
     Start-Process -FilePath $pythonInstallerPath -ArgumentList "/passive InstallAllUsers=1 PrependPath=1" -Wait
-    Start-Sleep -Seconds 4
-    # After installation, recheck Python version
-    $installedPythonVersion = Get-PythonVersion
+    Write-Host "Downloaded Python 3.11.4"
+    while ($null -eq ($installedPythonVersion = Get-PythonVersion)) {
+        Start-Sleep -Seconds 1
+    }
 }
 
 # Step 3: Set up Python virtual environment
