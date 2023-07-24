@@ -9,7 +9,7 @@ def create_default_config():
         'schedule_name': 'Hoyolab Check In',
         'delay_minute': 1,
         'run_time(24h)': 12,
-        'reset_timezone(UTC)': '08'
+        'random_delay' : 5
     }
     return default_config
 
