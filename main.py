@@ -28,7 +28,7 @@ def GetToken(browser:str, domain_name:str):
             cookies = browser_cookie3.opera_gx(domain_name=domain_name)
         else:
             error.show_error_message('no browser defined')
-        cookie_name = ['ltoken', 'ltuid','cookie_token']
+        cookie_name = ['ltoken', 'ltuid','ltoken_v2','ltuid_v2']
         token = {}
         for cookie in cookies:
             if cookie.name in cookie_name:
