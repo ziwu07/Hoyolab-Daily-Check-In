@@ -23,6 +23,7 @@ if ($null -eq $installedPythonVersion -or $installedPythonVersion -lt $requiredP
 
     Invoke-WebRequest -Uri $pythonInstallerUrl -OutFile $pythonInstallerPath
     Start-Process -FilePath $pythonInstallerPath -ArgumentList "/passive InstallAllUsers=1 PrependPath=1" -Wait
+    Write-Host "Downloaded Python"
     Start-Sleep -Seconds 1
     $env:Path=([System.Environment]::GetEnvironmentVariable("Path","Machine"),[System.Environment]::GetEnvironmentVariable("Path","User")) -match '.' -join ';'
     # After installation, recheck Python version
