@@ -30,5 +30,5 @@ if '%errorlevel%' NEQ '0' (
 :--------------------------------------    
 
 set "currentDir=%CD%"
-call PowerShell.exe -ExecutionPolicy Bypass -File "%currentDir%\script.ps1"
+call PowerShell.exe -ExecutionPolicy Bypass -File "%currentDir%\python_installer.ps1"
 "%currentDir%\venv\Scripts\python.exe" "%currentDir%\scheduler.py"
