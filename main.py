@@ -28,7 +28,7 @@ def GetToken(browser:str, domain_name:str):
             cookies = browser_cookie3.opera_gx(domain_name=domain_name)
         else:
             error.show_error_message('no browser defined')
-        cookie_name = ['ltoken', 'ltuid']
+        cookie_name = ['ltoken', 'ltuid','cookie_token']
         token = {}
         for cookie in cookies:
             if cookie.name in cookie_name:
@@ -39,6 +39,7 @@ def GetToken(browser:str, domain_name:str):
 
 if __name__ == "__main__":
     token = GetToken(browser=_config['browser'], domain_name=domain_name)
-    genshin.Claim(act_id=genshin_act_id, cookie=token)
+    print(token)
+    print(genshin.requests_post(act_id=genshin_act_id, cookie=token))
     star_rail.Claim(act_id=star_rail_act_id, cookie=token)
     

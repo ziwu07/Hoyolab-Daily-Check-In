@@ -5,10 +5,11 @@ def Claim(act_id:str, cookie:dict):
     resp = requests_post(act_id=act_id, cookie=cookie)
     if str(resp['retcode']) == '-5003' and str(resp['message']) == "You've already checked in today, Trailblazer~":
         return True
+    elif str(resp['retcode']) == '0' and str(resp['data']['gt_result']['is_risk']) == 'True':
+        error.show_error_message('please relogin at hoyolab.com')
     elif str(resp['retcode']) == '0':
         return False
     else:
-        print(resp)
         error.show_error_message('at response code for claimReward()')
     
 def requests_post(act_id:str, cookie:dict):
