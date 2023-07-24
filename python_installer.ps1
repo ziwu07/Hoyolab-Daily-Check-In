@@ -28,4 +28,4 @@ if ($null -eq $installedPythonVersion -or $installedPythonVersion -lt $requiredP
 
 Start-Sleep -Seconds 2
 $scriptDir = Join-Path $PSScriptRoot "install_package.ps1"
-Start-Process -FilePath $scriptDir -Wait
+Start-Process powershell.exe -ArgumentList "-ExecutionPolicy Bypass -File '$scriptDir'" -Wait
