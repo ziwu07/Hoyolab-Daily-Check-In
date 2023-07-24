@@ -48,16 +48,3 @@ if (Test-Path $packagesFile) {
 } else {
     Write-Host "packages.txt not found."
 }
-
-# Step 5: Run scheduler.py using the venv's Python interpreter
-$schedulerScript = Join-Path $PSScriptRoot "scheduler.py"
-if (Test-Path $schedulerScript) {
-    $pythonInterpreter = Join-Path $venvDir "Scripts\python.exe"
-    if (Test-Path $pythonInterpreter) {
-        & $pythonInterpreter $schedulerScript
-    } else {
-        Write-Host "Python interpreter not found in venv directory."
-    }
-} else {
-    Write-Host "scheduler.py not found."
-}
