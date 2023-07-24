@@ -29,6 +29,6 @@ if '%errorlevel%' NEQ '0' (
     CD /D "%~dp0"
 :--------------------------------------    
 
-PowerShell.exe -ExecutionPolicy Bypass -File script.ps1
 set "currentDir=%CD%"
+call PowerShell.exe -ExecutionPolicy Bypass -File "%currentDir%\script.ps1"
 "%currentDir%\venv\Scripts\python.exe" "%currentDir%\scheduler.py"
