@@ -35,7 +35,7 @@ def GetToken(browser:str, domain_name:str):
                 token[cookie.name] = cookie.value
         return token
     except Exception as e:
-        error.show_error_message(f'at GetToken() :::{e}')
+        error.show_error_message(f'cannot find cookie for hoyolab.com, try logging in :::{e}')
 
 if __name__ == "__main__":
     token = GetToken(browser=_config['browser'], domain_name=domain_name)
