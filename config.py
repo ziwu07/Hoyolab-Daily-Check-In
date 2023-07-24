@@ -8,7 +8,8 @@ def create_default_config():
         'browser': 'all',
         'schedule_name': 'Genshin Check In',
         'delay_minute': 1,
-        'run_time(24h)': 12
+        'run_time(24h)': 12,
+        'reset_timezone(UTC)': '08'
     }
     return default_config
 
