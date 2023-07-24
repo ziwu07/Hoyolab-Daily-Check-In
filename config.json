@@ -1,0 +1,6 @@
+{
+    "browser": "all",
+    "schedule_name": "Daily Check In",
+    "delay_minute": 1,
+    "run_time(24h)": 12
+}
