@@ -19,3 +19,6 @@ def setupScheduler():
         error.show_error_message(f'at setupScheduler(), return code is {ret_code}')
     elif ret_code == 0:
         error.show_info('Scheduler set up successful')
+
+if __name__ == "__main__":
+    setupScheduler()
