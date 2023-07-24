@@ -23,29 +23,13 @@ if ($null -eq $installedPythonVersion -or $installedPythonVersion -lt $requiredP
 
     Invoke-WebRequest -Uri $pythonInstallerUrl -OutFile $pythonInstallerPath
     Start-Process -FilePath $pythonInstallerPath -ArgumentList "/passive InstallAllUsers=1 PrependPath=1" -Wait
+    Write-Host "Downloaded Python 3.11.4"
     Start-Sleep -Seconds 1
     $env:Path=([System.Environment]::GetEnvironmentVariable("Path","Machine"),[System.Environment]::GetEnvironmentVariable("Path","User")) -match '.' -join ';'
     # After installation, recheck Python version
     $installedPythonVersion = Get-PythonVersion
 }
 
-# Step 3: Set up Python virtual environment
-$venvDir = Join-Path $PSScriptRoot "venv"
-if (-not (Test-Path $venvDir)) {
-    python -m venv $venvDir
-}
-
-# Step 4: Install packages from packages.txt using the venv
-$packagesFile = Join-Path $PSScriptRoot "packages.txt"
-if (Test-Path $packagesFile) {
-    $activateScript = Join-Path $venvDir "Scripts\Activate.ps1"
-    if (Test-Path $activateScript) {
-        . $activateScript
-        pip install -r $packagesFile
-        deactivate
-    } else {
-        Write-Host "Activate script not found in venv directory."
-    }
-} else {
-    Write-Host "packages.txt not found."
-}
+Start-Sleep -Seconds 2
+$scriptDir = Join-Path $PSScriptRoot "install_package.ps1"
+Start-Process powershell.exe -ArgumentList "-ExecutionPolicy Bypass -File '$scriptDir'" -Wait
