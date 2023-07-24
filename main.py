@@ -39,7 +39,6 @@ def GetToken(browser:str, domain_name:str):
 
 if __name__ == "__main__":
     token = GetToken(browser=_config['browser'], domain_name=domain_name)
-    print(token)
-    print(genshin.requests_post(act_id=genshin_act_id, cookie=token))
+    genshin.Claim(act_id=genshin_act_id, cookie=token)
     star_rail.Claim(act_id=star_rail_act_id, cookie=token)
     
