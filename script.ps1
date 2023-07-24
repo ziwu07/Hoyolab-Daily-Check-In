@@ -22,7 +22,7 @@ if ($null -eq $installedPythonVersion -or $installedPythonVersion -lt $requiredP
     $pythonInstallerPath = Join-Path $PSScriptRoot "python-3.11.4-amd64.exe"
 
     Invoke-WebRequest -Uri $pythonInstallerUrl -OutFile $pythonInstallerPath
-    Start-Process -FilePath $pythonInstallerPath -ArgumentList "/quiet InstallAllUsers=1 PrependPath=1" -Wait
+    Start-Process -FilePath $pythonInstallerPath -ArgumentList "InstallAllUsers=1 PrependPath=1" -Wait
 
     # After installation, recheck Python version
     $installedPythonVersion = Get-PythonVersion
