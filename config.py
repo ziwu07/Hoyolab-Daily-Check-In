@@ -6,7 +6,7 @@ CONFIG_FILE_PATH = "config.json"
 def create_default_config():
     default_config = {
         'browser': 'all',
-        'schedule_name': 'Genshin Check In',
+        'schedule_name': 'Hoyolab Check In',
         'delay_minute': 1,
         'run_time(24h)': 12,
         'reset_timezone(UTC)': '08'
