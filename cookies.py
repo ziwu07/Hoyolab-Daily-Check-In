@@ -5,6 +5,7 @@ import pickle
 
 COOKIE_FILE = "./cookies.pkl"
 
+
 def get_cookies(browser: str, domain_name: str) -> CookieJar:
     from_browser = get_from_browser(browser=browser, domain_name=domain_name)
     try:
@@ -15,10 +16,13 @@ def get_cookies(browser: str, domain_name: str) -> CookieJar:
             else:
                 return pickle.load(file)
     except FileNotFoundError:
-        open(COOKIE_FILE, "w")
-        
-        return get_cookies(browser=browser, domain_name=domain_name)
-    return
+        with open(COOKIE_FILE, "xb") as file:
+            if from_browser == None:
+                return error.crash("unable to get cookie from browser")
+            else:
+                pickle.dump(from_browser, file)
+                return from_browser
+
 
 def get_from_browser(browser: str, domain_name: str) -> CookieJar | None:
     try:
@@ -37,8 +41,7 @@ def get_from_browser(browser: str, domain_name: str) -> CookieJar | None:
         elif ("opera" in browser) and ("gx" in browser):
             cookies = browser_cookie3.opera_gx(domain_name=domain_name)
         else:
-            error.show_error_message("no browser defined")
-            return None
+            return error.crash("no browser defined")
         return cookies
     except Exception as e:
         error.log(f"cannot find cookie for hoyolab.com : {e}", "warn")
