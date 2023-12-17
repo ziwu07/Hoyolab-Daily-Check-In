@@ -23,4 +23,4 @@ def log(message: str, level: str = "debug"):
 def crash(message: str) -> NoReturn:
     log(message=message, level="critical")
     messagebox.showerror(title="daily check in script", message=message)
-    exit(code=1)
+    return exit(code=1)
