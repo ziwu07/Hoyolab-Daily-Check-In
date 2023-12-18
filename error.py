@@ -17,7 +17,7 @@ def show_info(message: str = "info"):
 
 def log(message: str, level: str = "debug"):
     with open(LOG_FILE, "a") as file:
-        file.write(f"{datetime.now()} | {level}: {message}")
+        file.write(f"{datetime.now()} | {level}: {message}\n")
 
 
 def crash(message: str) -> NoReturn:
