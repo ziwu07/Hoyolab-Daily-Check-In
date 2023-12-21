@@ -1,7 +1,7 @@
 from typing import Callable
 import browser_cookie3
 import error
-from http.cookiejar import CookieJar
+from http.cookiejar import CookieJar, LWPCookieJar
 import pickle
 import config
 
@@ -10,20 +10,8 @@ COOKIE_FILE = "./cookies.pkl"
 
 def get_cookies(browser: config.Browser, domain_name: str) -> CookieJar:
     from_browser = get_from_browser(browser=browser, domain_name=domain_name)
-    try:
-        with open(COOKIE_FILE, "rb+") as file:
-            if from_browser != None:
-                pickle.dump(from_browser, file)
-                return from_browser
-            else:
-                return pickle.load(file)
-    except FileNotFoundError:
-        with open(COOKIE_FILE, "xb") as file:
-            if from_browser == None:
-                return error.crash("unable to get cookie from browser")
-            else:
-                pickle.dump(from_browser, file)
-                return from_browser
+    if from_browser != None:
+        filecookie = 
 
 
 def get_from_browser(browser: config.Browser, domain_name: str) -> CookieJar | None:

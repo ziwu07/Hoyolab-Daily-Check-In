@@ -1,4 +1,5 @@
 from http.cookiejar import CookieJar
+import pickle
 from typing import Any
 import requests
 import error
@@ -37,6 +38,8 @@ def api_call(req_url: str, ref_url: str, cookie: CookieJar) -> dict[str, Any]:
             headers=headers,
             cookies=requests.sessions.RequestsCookieJar().update(cookie),
         )
+        with open("./cookiefile.pkl", "wb") as file:
+            pickle.dump(response.cookies, file)
         return dict[str, Any](loads(response.json()))
     except requests.ConnectionError:
         error.crash("Connection err")
