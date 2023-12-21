@@ -1,4 +1,4 @@
-from typing import Callable, List, Optional
+from typing import Callable
 import browser_cookie3
 import error
 from http.cookiejar import CookieJar
@@ -27,9 +27,7 @@ def get_cookies(browser: config.Browser, domain_name: str) -> CookieJar:
 
 
 def get_from_browser(browser: config.Browser, domain_name: str) -> CookieJar | None:
-    browser_functions: dict[
-        config.Browser, Callable[[None, str], CookieJar] | Callable[[str], CookieJar]
-    ] = {
+    browser_functions: dict[config.Browser, Callable[..., CookieJar]] = {
         config.Browser.ALL: browser_cookie3.load,
         config.Browser.CHROME: browser_cookie3.chrome,
         config.Browser.CHROMIUM: browser_cookie3.chromium,

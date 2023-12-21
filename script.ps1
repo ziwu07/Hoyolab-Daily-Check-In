@@ -18,8 +18,8 @@ $installedPythonVersion = Get-PythonVersion
 
 if ($null -eq $installedPythonVersion -or $installedPythonVersion -lt $requiredPythonVersion) {
     # Step 2: Install Python 3.11 or the latest version
-    $pythonInstallerUrl = "https://www.python.org/ftp/python/3.11.4/python-3.11.4-amd64.exe"
-    $pythonInstallerPath = Join-Path $PSScriptRoot "python-3.11.4-amd64.exe"
+    $pythonInstallerUrl = "https://www.python.org/ftp/python/3.11.7/python-3.11.7-amd64.exe"
+    $pythonInstallerPath = Join-Path $PSScriptRoot "python-3.11.7-amd64.exe"
 
     Invoke-WebRequest -Uri $pythonInstallerUrl -OutFile $pythonInstallerPath
     Start-Process -FilePath $pythonInstallerPath -ArgumentList "/passive InstallAllUsers=1 PrependPath=1" -Wait

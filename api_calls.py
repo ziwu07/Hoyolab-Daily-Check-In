@@ -1,7 +1,6 @@
 from http.cookiejar import CookieJar
 from typing import Any
 import requests
-from urllib3 import Retry
 import error
 from json import loads
 
