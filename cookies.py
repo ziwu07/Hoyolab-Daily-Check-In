@@ -2,7 +2,6 @@ from typing import Callable
 import browser_cookie3
 import error
 from http.cookiejar import CookieJar, LWPCookieJar
-import pickle
 import config
 
 COOKIE_FILE = "./cookies.pkl"
@@ -11,7 +10,8 @@ COOKIE_FILE = "./cookies.pkl"
 def get_cookies(browser: config.Browser, domain_name: str) -> CookieJar:
     from_browser = get_from_browser(browser=browser, domain_name=domain_name)
     if from_browser != None:
-        filecookie = 
+        pass
+    pass
 
 
 def get_from_browser(browser: config.Browser, domain_name: str) -> CookieJar | None:

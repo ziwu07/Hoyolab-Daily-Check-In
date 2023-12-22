@@ -1,0 +1,18 @@
+([
+('Content-Type', 'application/json'), 
+('Content-Length', '54'), 
+('Connection', 'close'), 
+('Date', 'Fri, 22 Dec 2023 19:17:08 GMT'), 
+('Access-Control-Allow-Credentials', 'true'), 
+('Access-Control-Allow-Origin', 'https://act.hoyolab.com'), 
+('Access-Control-Expose-Headers', 'Ab_experiment_info_v1'), 
+('Vary', 'Origin'), 
+('Vary', 'Accept-Encoding'), 
+('X-Powered-By', 'takumi'), 
+('X-Trace-Id', '34676c540f0cc713:34676c540f0cc713:0:1'), 
+('X-Cache', 'Miss from cloudfront'), 
+('Via', '1.1 2ffb622580a0a24837f798fa62268b12.cloudfront.net (CloudFront)'), 
+('X-Amz-Cf-Pop', 'YTO50-P2'), 
+('X-Amz-Cf-Id', 'uBnynNAfGTRpdCmmSudtflLyt_FxT1sJE8GrJA8LZiQFVZSIFsE_Aw==')], 
+
+{'data': None, 'message': 'Not logged in', 'retcode': -100})

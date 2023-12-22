@@ -1,9 +1,11 @@
-from http.cookiejar import CookieJar
-import pickle
+from http.cookiejar import CookieJar, DefaultCookiePolicy
 from typing import Any
-import requests
+from urllib import request
+from http import HTTPMethod
 import error
-from json import loads
+import json
+import ssl
+import certifi
 
 
 def claim(req_url: str, ref_url: str, cookie: CookieJar) -> bool:
@@ -22,7 +24,9 @@ def claim(req_url: str, ref_url: str, cookie: CookieJar) -> bool:
         return False
 
 
-def api_call(req_url: str, ref_url: str, cookie: CookieJar) -> dict[str, Any]:
+def api_call(
+    req_url: str, ref_url: str, cookie: CookieJar
+) -> tuple[list[tuple[str, str]], dict[str, Any]]:
     headers = {
         "Accept": "application/json, text/plain, */*",
         "Accept-Language": "en-US,en;q=0.5",
@@ -32,18 +36,12 @@ def api_call(req_url: str, ref_url: str, cookie: CookieJar) -> dict[str, Any]:
         "Origin": "https://act.hoyolab.com",
         "Referer": ref_url,
     }
-    try:
-        response = requests.post(
-            req_url,
-            headers=headers,
-            cookies=requests.sessions.RequestsCookieJar().update(cookie),
-        )
-        with open("./cookiefile.pkl", "wb") as file:
-            pickle.dump(response.cookies, file)
-        return dict[str, Any](loads(response.json()))
-    except requests.ConnectionError:
-        error.crash("Connection err")
-    except requests.Timeout:
-        error.crash("Connection timeout")
-    except requests.exceptions.RequestException:
-        error.crash("unknown network err")
+    policy = DefaultCookiePolicy()
+    policy.hide_cookie2 = True
+    cookie.set_policy(policy=policy)
+    _request = request.Request(url=req_url, headers=headers, method=HTTPMethod.POST)
+    cookie.add_cookie_header(_request)
+    ssl_context = ssl.create_default_context()
+    ssl_context.load_verify_locations(certifi.where())
+    with request.urlopen(_request, context=ssl_context) as resp:
+        return (resp.getheaders(), dict(json.loads(resp.read())))
