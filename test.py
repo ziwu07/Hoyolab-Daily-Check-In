@@ -1,6 +1,5 @@
 from http.cookiejar import CookieJar
-import api_calls
-from main import genshin_ref_url, genshin_req_url
+import cookies
+import os
 
-
-print(api_calls.api_call(genshin_req_url, genshin_ref_url, cookie=CookieJar()))
+print(cookies.lauch_webview("https://www.google.com"))

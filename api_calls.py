@@ -1,27 +1,16 @@
 from http.cookiejar import CookieJar, DefaultCookiePolicy
+from turtle import pu
 from typing import Any
 from urllib import request
 from http import HTTPMethod
 import error
 import json
 import ssl
-import certifi
 
 
 def claim(req_url: str, ref_url: str, cookie: CookieJar) -> bool:
     resp = api_call(req_url=req_url, ref_url=ref_url, cookie=cookie)
-    if str(resp["retcode"]) == "-5003":
-        return True
-    elif str(resp["retcode"]) == "0":
-        if str(resp["data"]["gt_result"]["is_risk"]) == "True":
-            error.show_error_message("capcha triggered")
-            return False
-        else:
-            return False
-    elif str(resp["retcode"]) == "-100":
-        error.crash("not logged in")
-    else:
-        return False
+    pass
 
 
 def api_call(
@@ -41,7 +30,6 @@ def api_call(
     cookie.set_policy(policy=policy)
     _request = request.Request(url=req_url, headers=headers, method=HTTPMethod.POST)
     cookie.add_cookie_header(_request)
-    ssl_context = ssl.create_default_context()
-    ssl_context.load_verify_locations(certifi.where())
+    ssl_context = ssl.create_default_context(purpose=ssl.Purpose.SERVER_AUTH)
     with request.urlopen(_request, context=ssl_context) as resp:
         return (resp.getheaders(), dict(json.loads(resp.read())))
