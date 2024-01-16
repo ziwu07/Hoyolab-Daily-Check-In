@@ -1,8 +1,8 @@
 import json
-from typing import Any
 from dataclasses import dataclass
 
 CONFIG_FILE_PATH = "./config.json"
+COOKIE_FILE_PATH = "./Cookies"
 
 
 @dataclass()
@@ -17,5 +17,5 @@ class Config:
 
 def load() -> "Config":
     with open(CONFIG_FILE_PATH, "r") as config_file:
-        config_data: dict[str, Any] = json.load(config_file)
+        config_data = json.load(config_file)
     return Config(**config_data)

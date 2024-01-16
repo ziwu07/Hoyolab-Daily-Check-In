@@ -1,5 +1,4 @@
 from http.cookiejar import CookieJar, DefaultCookiePolicy
-from turtle import pu
 from typing import Any
 from urllib import request
 from http import HTTPMethod

@@ -18,7 +18,6 @@ _config = config.load()
 
 
 if __name__ == "__main__":
-    cookie = cookies.get_cookies(browser=_config.browser, domain_name=domain_name)
     if _config.genshin:
         api_calls.claim(req_url=genshin_req_url, ref_url=genshin_ref_url, cookie=cookie)
     if _config.star_rail:

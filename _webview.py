@@ -13,12 +13,7 @@ def lauch_webview(uri: str) -> list[SimpleCookie]:
 
     _cookies = []
     window = webview.create_window(title="hoyo login", url=uri)
-    menu = [
-        webview.menu.Menu(
-            "Cookies",
-            [webview.menu.MenuAction("Get Cookies", get_cookies)],
-        ),
-    ]
+    menu = [webview.menu.MenuAction("Get Cookies", get_cookies)]
     webview.start(
         user_agent=user_agent,
         private_mode=False,
