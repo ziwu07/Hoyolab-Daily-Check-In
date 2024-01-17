@@ -3,6 +3,9 @@ from dataclasses import dataclass
 
 CONFIG_FILE_PATH = "./config.json"
 COOKIE_FILE_PATH = "./Cookies"
+LOGIN_URI = "https://account.hoyolab.com/#/login"
+GENSHIN_ACT_ID = "e202102251931481"
+STAR_RAIL_ACT_ID = "e202303301540311"
 
 
 @dataclass()

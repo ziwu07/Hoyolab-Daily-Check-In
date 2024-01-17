@@ -1,15 +1,14 @@
-import http.cookiejar, _webview, calendar, time
-from config import COOKIE_FILE_PATH
+import http.cookiejar, _webview, calendar, time, config, error
 
 
-def get_cookies(uri):
-    cookies = http.cookiejar.LWPCookieJar(COOKIE_FILE_PATH)
+def get_cookies(uri=config.LOGIN_URI, force=False):
+    cookies = http.cookiejar.LWPCookieJar(config.COOKIE_FILE_PATH)
     try:
         cookies.load()
     except FileNotFoundError:
         cookies = get_cookies_webview(uri)
         cookies.save()
-    if not cookies:
+    if force or (not cookies):
         cookies = get_cookies_webview(uri)
         cookies.save()
     return cookies
@@ -17,7 +16,9 @@ def get_cookies(uri):
 
 def get_cookies_webview(uri):
     cookie = _webview.lauch_webview(uri)
-    cookies = http.cookiejar.LWPCookieJar(COOKIE_FILE_PATH)
+    if cookie is None:
+        error.crash("user quit")
+    cookies = http.cookiejar.LWPCookieJar(config.COOKIE_FILE_PATH)
     for c in cookie:
         for k, v in c.items():
             cookies.set_cookie(morsel_to_cookie(v))

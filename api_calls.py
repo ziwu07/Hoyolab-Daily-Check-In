@@ -2,19 +2,24 @@ from http.cookiejar import CookieJar, DefaultCookiePolicy
 from typing import Any
 from urllib import request
 from http import HTTPMethod
-import error
-import json
-import ssl
+import json, ssl, error, cookies
 
 
-def claim(req_url: str, ref_url: str, cookie: CookieJar) -> bool:
-    resp = api_call(req_url=req_url, ref_url=ref_url, cookie=cookie)
-    pass
+def claim(**args):
+    resp = api_call(**args)
+    match resp["retcode"]:
+        case -100:
+            error.log(str(resp["message"]), "warn")
+            args["cookie"] = cookies.get_cookies(force=True)
+            claim(**args)
+        case 0:
+            return
+        case _:
+            error.log(str(resp), "warn")
+    return
 
 
-def api_call(
-    req_url: str, ref_url: str, cookie: CookieJar
-) -> tuple[list[tuple[str, str]], dict[str, Any]]:
+def api_call(req_url: str, ref_url: str, cookie: CookieJar) -> dict[str, Any]:
     headers = {
         "Accept": "application/json, text/plain, */*",
         "Accept-Language": "en-US,en;q=0.5",
@@ -31,4 +36,4 @@ def api_call(
     cookie.add_cookie_header(_request)
     ssl_context = ssl.create_default_context(purpose=ssl.Purpose.SERVER_AUTH)
     with request.urlopen(_request, context=ssl_context) as resp:
-        return (resp.getheaders(), dict(json.loads(resp.read())))
+        return dict(json.loads(resp.read()))
