@@ -1,1 +1,1 @@
-pyinstaller --clean -n checkin -w -i NONE check_in.py
+pyinstaller --clean -F -n checkin -w -i NONE check_in.py

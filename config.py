@@ -12,10 +12,6 @@ STAR_RAIL_ACT_ID = "e202303301540311"
 class Config:
     star_rail: bool = True
     genshin: bool = True
-    schedule_name: str = "Hoyolab Check In"
-    delay_minute: int = 30
-    run_time_24h: int = 12
-    random_delay: int = 20
 
 
 def load() -> "Config":

@@ -1,8 +1,4 @@
 {
     "star_rail": true,
-    "genshin": true,
-    "schedule_name": "Hoyolab Check In",
-    "delay_minute": 1,
-    "run_time_24h": 12,
-    "random_delay": 5
+    "genshin": true
 }

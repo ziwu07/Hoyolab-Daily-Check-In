@@ -25,7 +25,7 @@ def api_call(req_url: str, ref_url: str, cookie: CookieJar) -> dict[str, Any]:
         "Accept-Language": "en-US,en;q=0.5",
         "Connection": "keep-alive",
         "Content-Type": "application/json;charset=utf-8",
-        "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36",
+        "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36",
         "Origin": "https://act.hoyolab.com",
         "Referer": ref_url,
     }

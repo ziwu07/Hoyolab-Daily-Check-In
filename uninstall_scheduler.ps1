@@ -1,0 +1,1 @@
+Unregister-ScheduledTask -Confirm False -TaskName "Hoyolab Check In"
