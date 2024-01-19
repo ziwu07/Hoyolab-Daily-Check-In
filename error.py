@@ -1,6 +1,7 @@
 from tkinter import messagebox
 from datetime import datetime
 from typing import NoReturn
+from sys import exit
 
 LOG_FILE = "./logfile.log"
 
@@ -23,4 +24,4 @@ def log(message: str, level: str = "debug"):
 def crash(message: str) -> NoReturn:
     log(message=message, level="critical")
     messagebox.showerror(title="daily check in script", message=message)
-    return exit(code=1)
+    return exit(1)
