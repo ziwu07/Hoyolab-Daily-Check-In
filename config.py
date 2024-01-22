@@ -1,38 +1,25 @@
 import json
-import os
+from dataclasses import dataclass, asdict
 
-CONFIG_FILE_PATH = "config.json"
+CONFIG_FILE_PATH = "./config.json"
+COOKIE_FILE_PATH = "./Cookies"
+LOGIN_URI = "https://account.hoyolab.com/#/login"
+GENSHIN_ACT_ID = "e202102251931481"
+STAR_RAIL_ACT_ID = "e202303301540311"
 
-def create_default_config():
-    default_config = {
-        'browser': 'all',
-        'schedule_name': 'Hoyolab Check In',
-        'delay_minute': 1,
-        'run_time(24h)': 12,
-        'random_delay' : 5
-    }
-    return default_config
 
-def write_config(config):
-    with open(CONFIG_FILE_PATH, "w") as config_file:
-        json.dump(config, config_file, indent=4)
+@dataclass()
+class Config:
+    star_rail: bool = True
+    genshin: bool = True
 
-def read_config():
-    if not os.path.exists(CONFIG_FILE_PATH):
-        config = create_default_config()
-        write_config(config)
-    else:
+
+def load() -> "Config":
+    try:
         with open(CONFIG_FILE_PATH, "r") as config_file:
-            config = json.load(config_file)
-        default_config = create_default_config()
-        for key, value in default_config.items():
-            if key not in config:
-                config[key] = value
-        write_config(config)
-
-    return config
-
-def update_config(key, value):
-    config = read_config()
-    config[key] = value
-    write_config(config)
+            config_data = json.load(config_file)
+            return Config(**config_data)
+    except FileNotFoundError:
+        with open(CONFIG_FILE_PATH, "x") as config_file:
+            json.dump(asdict(Config()), config_file, indent=4)
+        return Config()

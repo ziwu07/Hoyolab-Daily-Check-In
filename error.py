@@ -1,12 +1,27 @@
 from tkinter import messagebox
-import inspect
-import os
+from datetime import datetime
+from typing import NoReturn
+from sys import exit
 
-def show_error_message(message:str = 'unknown error'):
-    caller_frame = inspect.currentframe().f_back
-    caller_filepath = caller_frame.f_code.co_filename
-    caller_filename = os.path.basename(caller_filepath)
-    messagebox.showerror(title=caller_filename, message=message)
+LOG_FILE = "./logfile.log"
 
-def show_info(message:str = 'info'):
-    messagebox.showinfo('Info', message=message)
+
+def show_error_message(message: str = "unknown error"):
+    log(message=message, level="err")
+    messagebox.showerror(title="daily check in script", message=message)
+
+
+def show_info(message: str = "info"):
+    log(message=message, level="info")
+    messagebox.showinfo("Info", message=message)
+
+
+def log(message: str, level: str = "debug"):
+    with open(LOG_FILE, "a") as file:
+        file.write(f"{datetime.now()} | {level}: {message}\n")
+
+
+def crash(message: str) -> NoReturn:
+    log(message=message, level="critical")
+    messagebox.showerror(title="daily check in script", message=message)
+    return exit(1)
