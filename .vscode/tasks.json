@@ -6,10 +6,7 @@
         {
             "label": "Build",
             "type": "shell",
-            "command": [
-                "${workspaceFolder}/.venv/Scripts/activate.bat",
-                "${workspaceFolder}/build.bat",
-            ],
+            "command": "${workspaceFolder}/.venv/Scripts/activate.ps1 && ${workspaceFolder}/build.bat",
             "group": {
                 "kind": "build",
                 "isDefault": true
