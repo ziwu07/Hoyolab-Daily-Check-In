@@ -160,3 +160,5 @@ cython_debug/
 #.idea/
 
 webview_storage/
+Cookies
+logfile.log
