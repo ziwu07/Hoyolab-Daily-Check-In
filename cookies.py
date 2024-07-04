@@ -41,8 +41,7 @@ def morsel_to_cookie(morsel):
             raise TypeError(f"max-age: {morsel['max-age']} must be integer")
     elif morsel["expires"]:
         time_template = "%a, %d-%b-%Y %H:%M:%S GMT"
-        expires = calendar.timegm(time.strptime(morsel["expires"],
-                                                time_template))
+        expires = calendar.timegm(time.strptime(morsel["expires"], time_template))
     result = {
         "version": 0,
         "name": morsel.key,

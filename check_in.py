@@ -17,4 +17,7 @@ if __name__ == "__main__":
         api_calls.claim(
             req_url=STAR_RAIL_REQ_URL, ref_url=STAR_RAIL_REF_URL, cookie=cookie
         )
+    if _config.zzz:
+        api_calls.claim(req_url=ZZZ_REQ_URL, ref_url=ZZZ_REF_URL,
+                        cookie=cookie, data=ZZZ_REQ_DATA)
     error.log("checked in")

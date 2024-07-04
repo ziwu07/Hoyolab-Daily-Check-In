@@ -1,10 +1,9 @@
 from http.cookies import SimpleCookie
+from config import USER_AGENT
 import os
 import webview
 
 storage_path = os.path.join(os.getcwd(), "webview_storage")
-user_agent = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) \
-    AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
 
 
 def lauch_webview(uri: str) -> list[SimpleCookie] | None:
@@ -30,7 +29,7 @@ def lauch_webview(uri: str) -> list[SimpleCookie] | None:
         )
     ]
     webview.start(
-        user_agent=user_agent,
+        user_agent=USER_AGENT,
         private_mode=False,
         storage_path=storage_path,
         gui="qt",
