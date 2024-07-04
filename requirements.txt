@@ -1,6 +1,2 @@
 # requirements.txt
-pywebview
-
-# for building
-#pyinstaller
-#pillow
+pywebview[qt]

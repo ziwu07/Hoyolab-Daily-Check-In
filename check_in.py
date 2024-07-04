@@ -1,4 +1,4 @@
-import cookies, api_calls, multiprocessing
+import cookies, api_calls, multiprocessing, error, datetime
 from config import *
 
 _config = load()
@@ -13,3 +13,4 @@ if __name__ == "__main__":
         api_calls.claim(
             req_url=STAR_RAIL_REQ_URL, ref_url=STAR_RAIL_REF_URL, cookie=cookie
         )
+    error.log("checked in")
