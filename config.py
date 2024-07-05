@@ -23,9 +23,14 @@ STAR_RAIL_REQ_URL = (
     "https://sg-public-api.hoyolab.com/event/luna/os/"
     f"sign?lang=en-us&act_id={STAR_RAIL_ACT_ID}"
 )
-ZZZ_REF_URL = "https://act.hoyolab.com/"
-ZZZ_REQ_URL = "https://sg-act-nap-api.hoyolab.com/event/luna/zzz/os/sign"
-ZZZ_REQ_DATA = bytes(f'{{"act_id": {ZZZ_ACT_ID}, "lang": "en-us"}}', "UTF-8")
+ZZZ_REF_URL = (
+    f"https://act.hoyolab.com/bbs/event/signin/zzz/"
+    f"{ZZZ_ACT_ID}.html?act_id={ZZZ_ACT_ID}"
+)
+ZZZ_REQ_URL = (
+    f"https://sg-act-nap-api.hoyolab.com/event/luna/zzz/os/"
+    f"sign?lang=en-us&act_id={ZZZ_ACT_ID}"
+)
 
 LOGIN_URI = GENSHIN_REF_URL
 USER_AGENT = (

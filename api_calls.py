@@ -23,9 +23,7 @@ def claim(**args):
     return
 
 
-def api_call(
-    req_url: str, ref_url: str, cookie: CookieJar, data: None | dict = None
-) -> dict[str, Any]:
+def api_call(req_url: str, ref_url: str, cookie: CookieJar) -> dict[str, Any]:
     headers = {
         "Accept": "application/json, text/plain, */*",
         "Accept-Language": "en-US,en;q=0.5",
@@ -38,9 +36,7 @@ def api_call(
     policy = DefaultCookiePolicy()
     policy.hide_cookie2 = True
     cookie.set_policy(policy=policy)
-    _request = request.Request(
-        url=req_url, headers=headers, method=HTTPMethod.POST, data=data
-    )
+    _request = request.Request(url=req_url, headers=headers, method=HTTPMethod.POST)
     cookie.add_cookie_header(_request)
     ssl_context = ssl.create_default_context(purpose=ssl.Purpose.SERVER_AUTH)
     with request.urlopen(_request, context=ssl_context) as resp:
