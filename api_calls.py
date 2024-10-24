@@ -1,16 +1,18 @@
+import json
+import ssl
+from http import HTTPMethod
 from http.cookiejar import CookieJar, DefaultCookiePolicy
 from typing import Any
 from urllib import request
-from http import HTTPMethod
-from config import USER_AGENT
-import json
-import ssl
-import error
+
 import cookies
+import error
+from config import USER_AGENT
 
 
 def claim(**args):
     resp = api_call(**args)
+    error.log(json.dumps(resp), "trace")
     match resp["retcode"]:
         case -100:
             error.log(str(resp["message"]), "warn")
@@ -23,20 +25,30 @@ def claim(**args):
     return
 
 
-def api_call(req_url: str, ref_url: str, cookie: CookieJar) -> dict[str, Any]:
+def api_call(
+    req_url: str,
+    ref_url: str,
+    cookie: CookieJar,
+    data: bytes = bytes(),
+    other_headers: dict[str, str] = {},
+) -> dict[str, Any]:
     headers = {
-        "Accept": "application/json, text/plain, */*",
+        "Accept": "application/json",
         "Accept-Language": "en-US,en;q=0.5",
         "Connection": "keep-alive",
         "Content-Type": "application/json;charset=utf-8",
         "User-Agent": USER_AGENT,
         "Origin": "https://act.hoyolab.com",
         "Referer": ref_url,
+        "X-Rpc-Platform": "4",
     }
+    headers.update(other_headers)
     policy = DefaultCookiePolicy()
     policy.hide_cookie2 = True
     cookie.set_policy(policy=policy)
-    _request = request.Request(url=req_url, headers=headers, method=HTTPMethod.POST)
+    _request = request.Request(
+        url=req_url, headers=headers, method=HTTPMethod.POST, data=data
+    )
     cookie.add_cookie_header(_request)
     ssl_context = ssl.create_default_context(purpose=ssl.Purpose.SERVER_AUTH)
     with request.urlopen(_request, context=ssl_context) as resp:

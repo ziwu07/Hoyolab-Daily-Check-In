@@ -1,6 +1,7 @@
-import cookies
-import api_calls
 import multiprocessing
+
+import api_calls
+import cookies
 import error
 from config import *
 
@@ -17,5 +18,11 @@ if __name__ == "__main__":
             req_url=STAR_RAIL_REQ_URL, ref_url=STAR_RAIL_REF_URL, cookie=cookie
         )
     if _config.zzz:
-        api_calls.claim(req_url=ZZZ_REQ_URL, ref_url=ZZZ_REF_URL, cookie=cookie)
+        api_calls.claim(
+            req_url=ZZZ_REQ_URL,
+            ref_url=ZZZ_REF_URL,
+            cookie=cookie,
+            data=ZZZ_REQ_DATA,
+            other_headers=ZZZ_HEADERS,
+        )
     error.log("checked in")

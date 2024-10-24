@@ -1,5 +1,5 @@
 import json
-from dataclasses import dataclass, asdict
+from dataclasses import asdict, dataclass
 
 CONFIG_FILE_PATH = "./config.json"
 COOKIE_FILE_PATH = "./Cookies"
@@ -28,9 +28,11 @@ ZZZ_REF_URL = (
     f"{ZZZ_ACT_ID}.html?act_id={ZZZ_ACT_ID}"
 )
 ZZZ_REQ_URL = (
-    f"https://sg-act-nap-api.hoyolab.com/event/luna/zzz/os/"
+    f"https://sg-public-api.hoyolab.com/event/luna/zzz/os/"
     f"sign?lang=en-us&act_id={ZZZ_ACT_ID}"
 )
+ZZZ_REQ_DATA = json.dumps({"act_id": ZZZ_ACT_ID, "lang": "en-us"}).encode()
+ZZZ_HEADERS = {"X-Rpc-Signgame": "zzz"}
 
 LOGIN_URI = GENSHIN_REF_URL
 USER_AGENT = (
