@@ -1,0 +1,10 @@
+[Unit]
+Description=Hoyolab Daily Check-In
+After=network-online.target graphical-session.target sockets.target
+BindsTo=sockets.target
+
+[Service]
+Type=oneshot
+ExecStart=/usr/bin/python3 ./check_in.py
+WorkingDirectory=%h/repos/Hoyolab-Daily-Check-In/
+Environment=HOME=%h

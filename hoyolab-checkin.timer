@@ -1,0 +1,11 @@
+[Unit]
+Description=Daily Hoyolab Check-In Timer
+
+[Timer]
+OnCalendar=*-*-* 12:00:00
+AccuracySec=1m
+RandomizedDelaySec=10m
+Persistent=true
+
+[Install]
+WantedBy=graphical-session.target
