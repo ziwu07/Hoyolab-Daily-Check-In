@@ -13,11 +13,21 @@ Automated daily sign-in for Genshin Impact, Honkai: Star Rail, and Zenless Zone 
 
 1. Install the dependency:
 
-   ```
-   pip install pywebview[qt]
-   ```
+    **Arch Linux based**
 
-2. (Optional) Set up the systemd timer to run the check-in daily at noon:
+    ```
+    sudo pacman -S python-pywebview python-qtpy
+    ```
+
+    **Other distros / manual install**
+
+    ```
+    python -m venv .venv
+    source .venv/bin/activate
+    pip install pywebview[qt]
+    ```
+
+2. (Recommended) Set up the systemd timer to run the check-in daily at noon:
 
    ```
    cp hoyolab-checkin.{service,timer} ~/.config/systemd/user/
