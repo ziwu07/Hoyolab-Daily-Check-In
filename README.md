@@ -16,7 +16,7 @@ Automated daily sign-in for Genshin Impact, Honkai: Star Rail, and Zenless Zone 
     **Arch Linux based**
 
     ```sh
-    sudo pacman -S python-pywebview python-qtpy
+    sudo pacman -S python-pywebview python-qtpy tk
     ```
 
     **Other distros / manual install**
