@@ -15,13 +15,13 @@ Automated daily sign-in for Genshin Impact, Honkai: Star Rail, and Zenless Zone 
 
     **Arch Linux based**
 
-    ```
+    ```sh
     sudo pacman -S python-pywebview python-qtpy
     ```
 
     **Other distros / manual install**
 
-    ```
+    ```sh
     python -m venv .venv
     source .venv/bin/activate
     pip install pywebview[qt]
@@ -29,7 +29,7 @@ Automated daily sign-in for Genshin Impact, Honkai: Star Rail, and Zenless Zone 
 
 2. (Recommended) Set up the systemd timer to run the check-in daily at noon:
 
-   ```
+   ```sh
    cp hoyolab-checkin.{service,timer} ~/.config/systemd/user/
    ```
 
@@ -37,7 +37,7 @@ Automated daily sign-in for Genshin Impact, Honkai: Star Rail, and Zenless Zone 
 
 3. Enable and start the timer:
 
-   ```
+   ```sh
    systemctl --user enable --now hoyolab-checkin.timer
    ```
 
@@ -45,7 +45,7 @@ Automated daily sign-in for Genshin Impact, Honkai: Star Rail, and Zenless Zone 
 
 Run the script manually:
 
-```
+```sh
 python check_in.py
 ```
 
@@ -73,7 +73,7 @@ Set any game to `false` to skip its daily claim. If `config.json` doesn't exist 
 
 To remove the systemd timer, stop and disable it, then delete the unit files:
 
-```
+```sh
 systemctl --user stop hoyolab-checkin.timer
 systemctl --user disable hoyolab-checkin.timer
 rm ~/.config/systemd/user/hoyolab-checkin.{service,timer}
